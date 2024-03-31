@@ -7,7 +7,7 @@
 ## How to use it?
 
 ```tsx
-import { SlotsProps, Slots, SlotsCreator } from './Slots';
+import { SlotsProps, Slots, SlotsCreator } from 'slots-component';
 
 const DEFAULT_SLOTS = {
   List: 'ul',
