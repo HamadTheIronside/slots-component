@@ -1,0 +1,24 @@
+{
+  "name": "slots-component",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.73",
+    "release-it": "^17.1.1",
+    "typescript": "^5.4.3"
+  },
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Abdolah Keshtkar",
+  "license": "MIT",
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    }
+  }
+}
