@@ -1,11 +1,15 @@
 {
   "name": "slots-component",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "ts-node --typeCheck index.test.tsx"
   },
   "devDependencies": {
+    "@type-challenges/utils": "^0.1.1",
     "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
     "release-it": "^17.1.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   },
   "version": "0.0.2",
@@ -20,5 +24,9 @@
     "github": {
       "release": true
     }
+  },
+  "peerDependencies": {
+    "react": ">=16.18.0",
+    "react-dom": ">=16.18.0"
   }
 }

@@ -8,6 +8,7 @@
       "es6",
       "dom"
     ],
+    "jsx": "react-jsx",
     "declaration": true,
     "outDir": "dist",
     "strict": true,
@@ -15,6 +16,6 @@
   },
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
   ]
 }
