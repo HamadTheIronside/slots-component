@@ -1,5 +1,5 @@
 import type { Equal, Expect } from '@type-challenges/utils'
-import type { Slots, SlotsCreator, SlotsProps } from "./index"
+import type { Slots, SlotsConfigCreator, SlotsProps } from "./index"
 import type { ComponentProps, PropsWithChildren, JSX } from 'react'
 
 const SLOTS = {
@@ -8,7 +8,7 @@ const SLOTS = {
   Custom1: (props: PropsWithChildren) => <></>
 } satisfies Slots
 
-type SlotsConfig = SlotsCreator<typeof SLOTS, { Name1: [number], Custom: [{ id: number, name: string }] }>
+type SlotsConfig = SlotsConfigCreator<typeof SLOTS, { Name1: [number], Custom: [{ id: number, name: string }] }>
 
 type Props = SlotsProps<SlotsConfig, { Custom: (props: PropsWithChildren) => JSX.Element }>
 
