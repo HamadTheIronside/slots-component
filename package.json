@@ -9,6 +9,7 @@
     "@type-challenges/utils": "^0.1.1",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "auto-changelog": "^2.4.0",
     "release-it": "^17.1.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
@@ -21,7 +22,8 @@
   "release-it": {
     "git": {
       "requireBranch": "main",
-      "commitMessage": "chore: release v${version}"
+      "commitMessage": "chore: release v${version}",
+      "changelog": "npx auto-changelog --stdout --commit-limit false --unreleased --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs"
     },
     "hooks": {
       "before:init": [
