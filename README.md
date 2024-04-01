@@ -132,3 +132,10 @@ export const List = <
   );
 };
 ```
+
+## Roadmap
+
+- Add CD
+- Write a simpler generic
+- Better documentation
+- Add example

@@ -1,6 +1,7 @@
 {
   "name": "slots-component",
   "scripts": {
+    "release": "release-it",
     "build": "tsc",
     "test": "ts-node --typeCheck index.test.tsx"
   },
@@ -19,10 +20,21 @@
   "license": "MIT",
   "release-it": {
     "git": {
+      "requireBranch": "main",
       "commitMessage": "chore: release v${version}"
+    },
+    "hooks": {
+      "before:init": [
+        "git pull",
+        "npm test"
+      ],
+      "after:bump": "npx auto-changelog -p"
     },
     "github": {
       "release": true
+    },
+    "npm": {
+      "publish": true
     }
   },
   "peerDependencies": {
