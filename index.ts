@@ -1,52 +1,37 @@
-import { ComponentProps, JSXElementConstructor, JSX } from 'react';
+import { CallbacksCreator, MaybeFunc, Merge, PartialProps, ReactComponent, Slots } from './utils';
 
-type MaybeFunc<Value, Args extends Array<unknown>> =
-  | Value
-  | ((...args: Args) => Value);
-
-type ReactComponent = keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
-type Slots = Record<string, ReactComponent>;
-
-type CallbacksCreator<DefaultProps extends Slots> = {
-  [Key in keyof DefaultProps]?: Array<any>;
-};
-
-type SlotProps<
-  TSlots extends Slots,
-  SlotPropsWithCallback extends CallbacksCreator<TSlots>
-> = {
-    [SlotKey in keyof TSlots as SlotKey extends string
-    ? Lowercase<SlotKey>
-    : never]: TSlots[SlotKey] extends ReactComponent
-    ? SlotPropsWithCallback[SlotKey] extends Array<any>
-    ? MaybeFunc<
-      Partial<ComponentProps<TSlots[SlotKey]>>,
-      SlotPropsWithCallback[SlotKey]
-    >
-    : Partial<ComponentProps<TSlots[SlotKey]>>
-    : never;
-  };
-
-type SlotsCreator<
+type SlotsConfigCreator<
   TDefaultSlots extends Slots,
   TCallbacks extends CallbacksCreator<TDefaultSlots>
 > = {
   DefaultSlots: TDefaultSlots;
-  Slots: { [Key in keyof TDefaultSlots]?: ReactComponent };
+  Slots: Partial<Record<keyof TDefaultSlots, ReactComponent>>;
   Callbacks: TCallbacks;
 };
 
+type SlotPropsCreator<
+  TSlotsConfig extends SlotsConfigCreator<any, any>,
+  TSlots extends Slots,
+> = {
+    [SlotKey in keyof TSlots as Lowercase<string & SlotKey>]?:
+      // Get the props and rename it to Props
+      PartialProps<TSlots[SlotKey]> extends infer Props ?
+        // get the slot args for slotProps callback if avaliable, name it Args
+        TSlotsConfig["Callbacks"][SlotKey] extends infer Args extends Array<any>
+          ? MaybeFunc<Props, Args> : Props
+      : never
+  };
+
 type SlotsProps<
-  TSlotsConfig extends SlotsCreator<any, any>,
-  TSlots extends TSlotsConfig['Slots']
+  TSlotsConfig extends SlotsConfigCreator<any, any>,
+  TSlots extends TSlotsConfig['Slots'],
 > = {
   slots?: TSlots;
-  slotProps?: Partial<
-    SlotProps<
-      Omit<TSlotsConfig['DefaultSlots'], keyof TSlots> & TSlots,
-      TSlotsConfig['Callbacks']
+  slotProps?: 
+    SlotPropsCreator<
+      TSlotsConfig,
+      Merge<TSlotsConfig['DefaultSlots'], TSlots>
     >
-  >;
 };
 
-export type { SlotsProps, SlotsCreator, Slots };
+export type { SlotsProps, SlotsConfigCreator, Slots, CallbacksCreator };

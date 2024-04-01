@@ -35,7 +35,7 @@ Or using yarn:
 First you need to define your default slots
 
 ```jsx
-import { SlotsProps, Slots, SlotsCreator } from 'slots-component';
+import { SlotsProps, Slots, SlotsConfigCreator } from 'slots-component';
 
 const DEFAULT_SLOTS = {
   Container: 'ul',
@@ -100,7 +100,7 @@ interface TItem {
   name: string;
 }
 
-type SlotsConfig = SlotsCreator<typeof DEFAULT_SLOTS, {
+type SlotsConfig = SlotsConfigCreator<typeof DEFAULT_SLOTS, {
   Row: [TItem];
 }>
 
@@ -135,7 +135,7 @@ export const List = <
 
 ## Roadmap
 
-- Add CD
-- Write a simpler generic
-- Better documentation
-- Add example
+- [ ] Add CD
+- [ ] Write a simpler generic
+- [ ] Better documentation
+- [ ] Add example
