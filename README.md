@@ -51,7 +51,7 @@ interface TItem {
   name: string;
 }
 
-type SlotsConfig = SlotsCreator<typeof DEFAULT_SLOTS, {
+type SlotsConfig = SlotsConfigCreator<typeof DEFAULT_SLOTS, {
   Row: [TItem]
 }>
 ```
@@ -88,7 +88,7 @@ export const List = <
 ### Full example
 
 ```jsx
-import { SlotsProps, Slots, SlotsCreator } from 'slots-component';
+import { SlotsProps, Slots, SlotsConfigCreator } from 'slots-component';
 
 const DEFAULT_SLOTS = {
   Container: 'ul',
